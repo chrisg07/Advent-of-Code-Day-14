@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test.ts --reporter spec",
-    "mocha": "ts-mocha -p ./tsconfig.json ./*.spec.ts",
-    "build": "npx ts-node index.ts",
-    "build:watch": "npx ts-node index.ts -w"
+    "test": "ts-mocha -p ./tsconfig.json ./*.spec.ts",
+    "build": "npx ts-node index.ts"
   },
   "keywords": [],
   "author": "",

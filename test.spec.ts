@@ -4,7 +4,7 @@ var ProblemSolver = require('./ProblemSolver.ts')
 
 describe('ProblemSolver', function() {
 
-	var problemSolver: ProblemSolver;
+	var problemSolver;
 	var lines: Array<string>
 
 	beforeEach(function(done) {
