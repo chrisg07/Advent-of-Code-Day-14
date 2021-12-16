@@ -18,11 +18,28 @@ describe('ProblemSolver', function() {
 			done()
 		})
 	
-  });
-	
-	it('reads input and number of paths', function(done) {
+  });	
+  
+	it('read input', function(done) {
 		problemSolver = new ProblemSolver(lines);
-		assert.equal(problemSolver.answer, 10)
+		assert.deepEqual(problemSolver.template, ['N', 'N', 'C', 'B'])
+		assert.equal(Object.entries(problemSolver.pairs).length, 16)
+		done()
+	})
+
+	it('match template after 1 step', function(done) {
+		problemSolver = new ProblemSolver(lines, 1);
+		assert.deepEqual(problemSolver.template, ['N', 'C', 'N', 'B', 'C', 'H', 'B'])
+		assert.equal(problemSolver.elements['N'], 2)
+		done()
+	})
+
+
+	it('solve test input for 10 step', function(done) {
+		problemSolver = new ProblemSolver(lines, 10);
+		assert.equal(problemSolver.elements['B'], 1749)
+		assert.equal(problemSolver.elements['H'], 161)
+		assert.equal(problemSolver.answer, 1588)
 		done()
 	})
 });
