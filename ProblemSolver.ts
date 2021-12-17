@@ -7,8 +7,10 @@ module.exports = class ProblemSolver {
 	elements: {
 		[index: string]: number
 	} = {}
+	steps = 0
 
 	constructor(lines: Array<string>, steps: number) {
+		this.steps = steps
 		for (let [index, entry] of lines.entries()) {
 			if (entry) {
 				// row of input
@@ -31,8 +33,18 @@ module.exports = class ProblemSolver {
 			}
 		}
 
-		for (let i = 0; i < steps; i++) {
-			this.template = this.insert(this.template)
+		for (let i = 0; i < this.template.length - 1; i++) {
+			const pair = this.template[i] + this.template[i + 1]
+			const insertionChar = this.pairs[pair]
+			if (this.elements[insertionChar]) {
+				this.elements[insertionChar]++
+			} else {
+				this.elements[insertionChar] = 1
+			}
+			// console.log('inserting: ', insertionChar, ' between ', pair, 'on step ', 1)
+
+			this.insert(this.template[i], insertionChar, 1)
+			this.insert(insertionChar, this.template[i + 1], 1)
 		}
 
 		this.answer = this.calculateAnswer()
@@ -45,18 +57,17 @@ module.exports = class ProblemSolver {
 		return max - min
 	}
 
-	insert(template: Array<string>): Array<string> {
-		for (let i = 0; i < template.length - 1; i++) {
-			const pair = template[i] + template[i + 1]
-			const insertionChar = this.pairs[pair]
+	insert(leftChar: string, rightChar: string, step: number): void {
+		if (step < this.steps) {
+			const insertionChar = this.pairs[leftChar + rightChar]
 			if (this.elements[insertionChar]) {
 				this.elements[insertionChar]++
 			} else {
 				this.elements[insertionChar] = 1
 			}
-			template.splice(i + 1, 0, insertionChar)
-			i++
+			// console.log('inserting: ', insertionChar, ' between ', pair, 'on step ', step)
+			this.insert(leftChar, insertionChar, step + 1)
+			this.insert(insertionChar, rightChar, step + 1)
 		}
-		return template
 	}
 }

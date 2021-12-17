@@ -29,11 +29,9 @@ describe('ProblemSolver', function() {
 
 	it('match template after 1 step', function(done) {
 		problemSolver = new ProblemSolver(lines, 1);
-		assert.deepEqual(problemSolver.template, ['N', 'C', 'N', 'B', 'C', 'H', 'B'])
 		assert.equal(problemSolver.elements['N'], 2)
 		done()
 	})
-
 
 	it('solve test input for 10 step', function(done) {
 		problemSolver = new ProblemSolver(lines, 10);
@@ -42,4 +40,12 @@ describe('ProblemSolver', function() {
 		assert.equal(problemSolver.answer, 1588)
 		done()
 	})
+
+	// it('solve test input for 40 step', function(done) {
+	// 	problemSolver = new ProblemSolver(lines, 40);
+	// 	assert.equal(problemSolver.elements['B'], 2192039569602)
+	// 	assert.equal(problemSolver.elements['H'], 3849876073)
+	// 	assert.equal(problemSolver.answer, 2188189693529)
+	// 	done()
+	// })
 });

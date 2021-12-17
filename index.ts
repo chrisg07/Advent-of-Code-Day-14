@@ -7,6 +7,6 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
 		return
 	}
 	const entries = data.split(/\r?\n/).map(line => line.trim());
-	const problemSolver = new ProblemSolver(entries, 10);
+	const problemSolver = new ProblemSolver(entries, 40);
 	console.log('answer: ', problemSolver.answer)
 })
